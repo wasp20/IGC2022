@@ -92,6 +92,14 @@ public class Proyecto_IGC {
                     Resource AWS = crearRecurso(uri, "AmazonWebServices", model);
                     Resource Azure = crearRecurso(uri, "MicrosoftAzure", model);
                     
+// Crear el nodo en blanco
+                    Resource nodoBlanco = model.createResource();
+
+// Crear recursos conectados al nodo en blando                    
+                    Resource geolocalilzation = crearRecurso(uri, "geolocalizationAPI", model);
+                    Resource cloudmessaging = crearRecurso(uri, "CloudMessaging", model);
+                    Resource firebase = crearRecurso(uri, "Firebase", model);
+                    
 // Agregar relaciones entre recursos
 // Hijos de Productos en la nube
                     model.add(Computacion, RDFS.subClassOf, ProductosNube);
@@ -125,6 +133,7 @@ public class Proyecto_IGC {
                     model.add(CloudStorage, RDF.type, AlmObjetos);
                     
           // Hijos de bases de datos
+          
                     model.add(BDRelacional, RDFS.subClassOf, BD);
                     model.add(BDNoRelacional, RDFS.subClassOf, BD);
                     
@@ -153,8 +162,8 @@ public class Proyecto_IGC {
                     
 // Crear propiedades y subpropiedades
                     Property ofrecer = crearPropiedad(uri, "ofrecer", model);
-                    Property migrarcloud = crearPropiedad(uri, "migrarACloud", model);
-                    Property evaluarcostos = crearPropiedad(uri, "evaluarCostos", model);
+                    //Property migrarcloud = crearPropiedad(uri, "migrarACloud", model);
+                    //Property evaluarcostos = crearPropiedad(uri, "evaluarCostos", model);
                     Property vender = crearPropiedad(uri, "venderProductosYServiciosDeTerceros", model);
                     Property venderlicencias = crearPropiedad(uri, "venderLicencias", model);
                     Property vendersuscripciones = crearPropiedad(uri, "venderSuscripciones", model);
@@ -163,13 +172,20 @@ public class Proyecto_IGC {
                     Property alquilarconcosto = crearPropiedad(uri, "alquilarConCosto", model);
                     
                     
-                    model.add(migrarcloud, RDFS.subPropertyOf, ofrecer);
-                    model.add(evaluarcostos, RDFS.subPropertyOf, ofrecer);
+                    //model.add(migrarcloud, RDFS.subPropertyOf, ofrecer);
+                    //model.add(evaluarcostos, RDFS.subPropertyOf, ofrecer);
                     model.add(vender, RDFS.subPropertyOf, ofrecer);
+                    model.add(venderlicencias, RDFS.subPropertyOf, vender);
+                    model.add(vendersuscripciones, RDFS.subPropertyOf, vender);
                     model.add(alquilar, RDFS.subPropertyOf, ofrecer);
                     model.add(alquilarsincosto, RDFS.subPropertyOf, alquilar);
                     model.add(alquilarconcosto, RDFS.subPropertyOf, alquilar);
 
+// Vincular el nodo en blanco
+                    GCP.addProperty(ofrecer, nodoBlanco);
+                    nodoBlanco.addProperty(alquilarconcosto, geolocalilzation);
+                    nodoBlanco.addProperty(alquilarconcosto, cloudmessaging);
+                    nodoBlanco.addProperty(alquilarconcosto, firebase);
 
                     
 // Guardar RDF
