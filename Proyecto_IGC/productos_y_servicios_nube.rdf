@@ -91,11 +91,11 @@
   <cloud:GoogleCloudPlatform rdf:about="http://www.cloud.com/Datastore">
     <rdf:type rdf:resource="http://www.cloud.com/BasesDeDatosNoRelacionales"/>
   </cloud:GoogleCloudPlatform>
+  <cloud:Firebase rdf:nodeID="A0">
+    <rdf:type rdf:resource="http://www.cloud.com/CloudMessaging"/>
+    <rdf:type rdf:resource="http://www.cloud.com/geolocalizationAPI"/>
+  </cloud:Firebase>
   <rdf:Description rdf:about="http://www.cloud.com/GoogleCloudPlatform">
-    <cloud:ofrecer rdf:parseType="Resource">
-      <cloud:alquilarConCosto rdf:resource="http://www.cloud.com/Firebase"/>
-      <cloud:alquilarConCosto rdf:resource="http://www.cloud.com/CloudMessaging"/>
-      <cloud:alquilarConCosto rdf:resource="http://www.cloud.com/geolocalizationAPI"/>
-    </cloud:ofrecer>
+    <cloud:ofrecer rdf:nodeID="A0"/>
   </rdf:Description>
 </rdf:RDF>
