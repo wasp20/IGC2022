@@ -1,0 +1,113 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:cloud="http://www.cloud.com/"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <cloud:GoogleCloudPlatform rdf:about="http://www.cloud.com/Filestore">
+    <rdf:type>
+      <rdf:Description rdf:about="http://www.cloud.com/AlmacenamientoDeArchivos">
+        <rdfs:subClassOf>
+          <rdf:Description rdf:about="http://www.cloud.com/Almacenamiento">
+            <rdfs:subClassOf rdf:resource="http://www.cloud.com/ServiciosEnLaNube"/>
+          </rdf:Description>
+        </rdfs:subClassOf>
+      </rdf:Description>
+    </rdf:type>
+  </cloud:GoogleCloudPlatform>
+  <cloud:MicrosoftAzure rdf:about="http://www.cloud.com/AzureDataBaseForMariaDB">
+    <rdf:type>
+      <rdf:Description rdf:about="http://www.cloud.com/BasesDeDatosNoRelacionales">
+        <rdfs:subClassOf>
+          <rdf:Description rdf:about="http://www.cloud.com/BaseDeDatos">
+            <rdfs:subClassOf rdf:resource="http://www.cloud.com/ServiciosEnLaNube"/>
+          </rdf:Description>
+        </rdfs:subClassOf>
+      </rdf:Description>
+    </rdf:type>
+  </cloud:MicrosoftAzure>
+  <cloud:GoogleCloudPlatform rdf:about="http://www.cloud.com/CloudSQL">
+    <rdf:type>
+      <rdf:Description rdf:about="http://www.cloud.com/BasesDeDatosRelacionales">
+        <rdfs:subClassOf rdf:resource="http://www.cloud.com/BaseDeDatos"/>
+      </rdf:Description>
+    </rdf:type>
+  </cloud:GoogleCloudPlatform>
+  <cloud:GoogleCloudPlatform rdf:about="http://www.cloud.com/CloudFunctions">
+    <rdfs:subClassOf>
+      <rdf:Description rdf:about="http://www.cloud.com/ArquitecturaBasadaEnEventos">
+        <rdfs:subClassOf>
+          <rdf:Description rdf:about="http://www.cloud.com/Computación">
+            <rdfs:subClassOf rdf:resource="http://www.cloud.com/ServiciosEnLaNube"/>
+          </rdf:Description>
+        </rdfs:subClassOf>
+      </rdf:Description>
+    </rdfs:subClassOf>
+  </cloud:GoogleCloudPlatform>
+  <rdf:Description rdf:about="http://www.cloud.com/migrarACloud">
+    <rdfs:subPropertyOf rdf:resource="http://www.cloud.com/ofrecer"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.cloud.com/alquilarSinCosto">
+    <rdfs:subPropertyOf>
+      <rdf:Description rdf:about="http://www.cloud.com/alquilarServicios">
+        <rdfs:subPropertyOf rdf:resource="http://www.cloud.com/ofrecer"/>
+      </rdf:Description>
+    </rdfs:subPropertyOf>
+  </rdf:Description>
+  <cloud:GoogleCloudPlatform rdf:about="http://www.cloud.com/PersistentDisk">
+    <rdf:type>
+      <rdf:Description rdf:about="http://www.cloud.com/AlmacenamientoEnBloque">
+        <rdfs:subClassOf rdf:resource="http://www.cloud.com/Almacenamiento"/>
+      </rdf:Description>
+    </rdf:type>
+  </cloud:GoogleCloudPlatform>
+  <rdf:Description rdf:about="http://www.cloud.com/OrquestaciónDeContenedores">
+    <rdfs:subClassOf>
+      <rdf:Description rdf:about="http://www.cloud.com/Contenedores">
+        <rdfs:subClassOf rdf:resource="http://www.cloud.com/Computación"/>
+      </rdf:Description>
+    </rdfs:subClassOf>
+  </rdf:Description>
+  <cloud:AmazonWebServices rdf:about="http://www.cloud.com/AWSLambda">
+    <rdfs:subClassOf rdf:resource="http://www.cloud.com/ArquitecturaBasadaEnEventos"/>
+  </cloud:AmazonWebServices>
+  <rdf:Description rdf:about="http://www.cloud.com/NúcleoCompartido">
+    <rdfs:subClassOf>
+      <rdf:Description rdf:about="http://www.cloud.com/MáquinasVirtuales">
+        <rdfs:subClassOf rdf:resource="http://www.cloud.com/Computación"/>
+      </rdf:Description>
+    </rdfs:subClassOf>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.cloud.com/PropósitoGeneral">
+    <rdfs:subClassOf rdf:resource="http://www.cloud.com/MáquinasVirtuales"/>
+  </rdf:Description>
+  <cloud:AmazonWebServices rdf:about="http://www.cloud.com/AmazonDynamoDB">
+    <rdf:type rdf:resource="http://www.cloud.com/BasesDeDatosNoRelacionales"/>
+  </cloud:AmazonWebServices>
+  <rdf:Description rdf:about="http://www.cloud.com/venderProductosYServiciosDeTerceros">
+    <rdfs:subPropertyOf rdf:resource="http://www.cloud.com/ofrecer"/>
+  </rdf:Description>
+  <cloud:MicrosoftAzure rdf:about="http://www.cloud.com/AzureSQLDatabase">
+    <rdf:type rdf:resource="http://www.cloud.com/BasesDeDatosRelacionales"/>
+  </cloud:MicrosoftAzure>
+  <rdf:Description rdf:about="http://www.cloud.com/evaluarCostos">
+    <rdfs:subPropertyOf rdf:resource="http://www.cloud.com/ofrecer"/>
+  </rdf:Description>
+  <cloud:MicrosoftAzure rdf:about="http://www.cloud.com/AzureFunctions">
+    <rdfs:subClassOf rdf:resource="http://www.cloud.com/ArquitecturaBasadaEnEventos"/>
+  </cloud:MicrosoftAzure>
+  <rdf:Description rdf:about="http://www.cloud.com/alquilarConCosto">
+    <rdfs:subPropertyOf rdf:resource="http://www.cloud.com/alquilarServicios"/>
+  </rdf:Description>
+  <cloud:AmazonWebServices rdf:about="http://www.cloud.com/AmazonRDS">
+    <rdf:type rdf:resource="http://www.cloud.com/BasesDeDatosRelacionales"/>
+  </cloud:AmazonWebServices>
+  <cloud:GoogleCloudPlatform rdf:about="http://www.cloud.com/CloudStorage">
+    <rdf:type>
+      <rdf:Description rdf:about="http://www.cloud.com/AlmacenamientoDeObjetos">
+        <rdfs:subClassOf rdf:resource="http://www.cloud.com/Almacenamiento"/>
+      </rdf:Description>
+    </rdf:type>
+  </cloud:GoogleCloudPlatform>
+  <cloud:GoogleCloudPlatform rdf:about="http://www.cloud.com/Datastore">
+    <rdf:type rdf:resource="http://www.cloud.com/BasesDeDatosNoRelacionales"/>
+  </cloud:GoogleCloudPlatform>
+</rdf:RDF>
