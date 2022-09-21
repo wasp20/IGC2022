@@ -90,8 +90,24 @@ public class inferencias {
                     } else {
                               System.out.println("La afirmacion NO es cierta ");
                     }
-
-
+                    
+                    
+                    // Inferencias de tipo domain
+                    // :BD :hasKeyValueParadigm "key-value"
+                    
+                    resourceURI = model.expandPrefix("cloud:BaseDeDatos");
+                    Resource BD = model.getResource(resourceURI);
+                    resourceURI = model.expandPrefix("cloud:BasesDeDatosNoRelacionales");
+                    Resource BDNoRelacional = model.getResource(resourceURI);
+                    
+                    
+                    // Inferencias union de conjunto                    
+                    if ( existenAfirmaciones (inf,  BD, RDF.type, BDNoRelacional)) {
+                              System.out.println("La afirmacion es cierta");
+                              mostrarDerivaciones(inf,  BD, RDF.type, BDNoRelacional);
+                    } else {
+                              System.out.println("La afirmacion NO es cierta ");
+                    }
+                    
           }
-
 }
