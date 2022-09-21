@@ -4,10 +4,18 @@ package proyecto_igc;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.util.Iterator;
+import org.apache.jena.rdf.model.InfModel;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Selector;
+import org.apache.jena.rdf.model.SimpleSelector;
+import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.rdf.model.StmtIterator;
+import org.apache.jena.reasoner.Derivation;
 import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.RDFS;
 
@@ -29,22 +37,61 @@ public class Proyecto_IGC {
                     } catch (FileNotFoundException e) {
                               System.out.println("Ocurrió un error al crear el archivo.");
                     }
-                   
                     model.write(output, "RDF/XML-ABBREV");
           }
-    
+          
+          public static Resource obtenerRecurso ( String id , Model model ) {
+                    String uri = model . expandPrefix (" pucp :" + id);
+                    return model . getResource (uri );
+          }
+
+          public static Property obtenerPropiedad ( String id , Model model ) {
+                    String uri = model . expandPrefix (" pucp :" + id);
+                    return model . getProperty (uri );
+          }
+          
+          public static void mostrarDeclaraciones(InfModel inf, Resource Sujeto, Property predicado, Resource objeto){
         
+                    Selector selector = new SimpleSelector(Sujeto, predicado, objeto);
+                    StmtIterator iter = inf.listStatements(selector);
+                    while (iter.hasNext()){
+                        System.out.println(iter.nextStatement().toString());
+                    }
+          }
+          
+          public static Boolean existenAfirmaciones(InfModel inf, Resource Sujeto, Property predicado, Resource objeto) {
+                    Boolean hayAfirmaciones;
+                    Selector selector = new SimpleSelector(Sujeto, predicado, objeto);
+                    StmtIterator iter = inf.listStatements(selector);
+                    hayAfirmaciones = iter.hasNext();
+
+                    return hayAfirmaciones;
+          }
+    
+          public static void mostrarDerivaciones(InfModel inf, Resource Sujeto, Property predicado, Resource objeto){
+        
+                    PrintWriter out = new PrintWriter(System.out);
+                    for (StmtIterator i = inf.listStatements(Sujeto, predicado, objeto);
+                              i.hasNext();){
+                              Statement s = i.nextStatement();
+                              System.out.println("Statement is " + s);
+                              for (Iterator id = inf.getDerivation(s); id.hasNext();){
+                                        Derivation deriv = (Derivation) id.next();
+                                        deriv.printTrace(out, true);
+                               }
+                    }
+                    out.flush();
+          }
+
+    
           public static void main(String[] args) {
                     Model model = ModelFactory.createDefaultModel();
                     String uri = "http://www.cloud.com/";
                     String ns = "cloud";
                     model.setNsPrefix(ns, uri);
                     
-                    
+ // Crear recurso Productos en la nube                   
                     Resource ProductosNube = crearRecurso(uri, "ServiciosEnLaNube", model);
-                    
-                    
-                    
                     
 // Crear recurso computacion
                     Resource Computacion = crearRecurso(uri, "Computación", model);                
@@ -92,6 +139,14 @@ public class Proyecto_IGC {
                     Resource AWS = crearRecurso(uri, "AmazonWebServices", model);
                     Resource Azure = crearRecurso(uri, "MicrosoftAzure", model);
                     
+// Crear el nodo en blanco
+                    Resource nodoBlanco = model.createResource();
+
+// Crear recursos conectados al nodo en blando                    
+                    Resource geolocalilzation = crearRecurso(uri, "geolocalizationAPI", model);
+                    Resource cloudmessaging = crearRecurso(uri, "CloudMessaging", model);
+                    Resource firebase = crearRecurso(uri, "Firebase", model);
+                    
 // Agregar relaciones entre recursos
 // Hijos de Productos en la nube
                     model.add(Computacion, RDFS.subClassOf, ProductosNube);
@@ -125,6 +180,7 @@ public class Proyecto_IGC {
                     model.add(CloudStorage, RDF.type, AlmObjetos);
                     
           // Hijos de bases de datos
+          
                     model.add(BDRelacional, RDFS.subClassOf, BD);
                     model.add(BDNoRelacional, RDFS.subClassOf, BD);
                     
@@ -153,8 +209,8 @@ public class Proyecto_IGC {
                     
 // Crear propiedades y subpropiedades
                     Property ofrecer = crearPropiedad(uri, "ofrecer", model);
-                    Property migrarcloud = crearPropiedad(uri, "migrarACloud", model);
-                    Property evaluarcostos = crearPropiedad(uri, "evaluarCostos", model);
+                    //Property migrarcloud = crearPropiedad(uri, "migrarACloud", model);
+                    //Property evaluarcostos = crearPropiedad(uri, "evaluarCostos", model);
                     Property vender = crearPropiedad(uri, "venderProductosYServiciosDeTerceros", model);
                     Property venderlicencias = crearPropiedad(uri, "venderLicencias", model);
                     Property vendersuscripciones = crearPropiedad(uri, "venderSuscripciones", model);
@@ -163,18 +219,29 @@ public class Proyecto_IGC {
                     Property alquilarconcosto = crearPropiedad(uri, "alquilarConCosto", model);
                     
                     
-                    model.add(migrarcloud, RDFS.subPropertyOf, ofrecer);
-                    model.add(evaluarcostos, RDFS.subPropertyOf, ofrecer);
+                    //model.add(migrarcloud, RDFS.subPropertyOf, ofrecer);
+                    //model.add(evaluarcostos, RDFS.subPropertyOf, ofrecer);
                     model.add(vender, RDFS.subPropertyOf, ofrecer);
+                    model.add(venderlicencias, RDFS.subPropertyOf, vender);
+                    model.add(vendersuscripciones, RDFS.subPropertyOf, vender);
                     model.add(alquilar, RDFS.subPropertyOf, ofrecer);
                     model.add(alquilarsincosto, RDFS.subPropertyOf, alquilar);
                     model.add(alquilarconcosto, RDFS.subPropertyOf, alquilar);
 
-
+// Vincular el nodo en blanco
+                    GCP.addProperty(ofrecer, nodoBlanco);
+                    nodoBlanco.addProperty(RDF.type, geolocalilzation);
+                    nodoBlanco.addProperty(RDF.type, cloudmessaging);
+                    nodoBlanco.addProperty(RDF.type, firebase);
                     
+// Relacionar recurso AmazonRDS con el recurso Azure mediante la propiedad alquilarconcosto 
+// - :AmazonRDS :alquilarconcosto :Azure                   
+                    model.add(AmazonRDS,alquilarconcosto, Azure);
+
 // Guardar RDF
                     grabarRDF("productos_y_servicios_nube.rdf", model);
                     model.write( System.out , "RDF/XML");
+                    
                     
           }
     

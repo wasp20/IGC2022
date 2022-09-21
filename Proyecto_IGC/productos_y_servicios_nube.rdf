@@ -31,6 +31,13 @@
       </rdf:Description>
     </rdf:type>
   </cloud:GoogleCloudPlatform>
+  <rdf:Description rdf:about="http://www.cloud.com/venderSuscripciones">
+    <rdfs:subPropertyOf>
+      <rdf:Description rdf:about="http://www.cloud.com/venderProductosYServiciosDeTerceros">
+        <rdfs:subPropertyOf rdf:resource="http://www.cloud.com/ofrecer"/>
+      </rdf:Description>
+    </rdfs:subPropertyOf>
+  </rdf:Description>
   <cloud:GoogleCloudPlatform rdf:about="http://www.cloud.com/CloudFunctions">
     <rdfs:subClassOf>
       <rdf:Description rdf:about="http://www.cloud.com/ArquitecturaBasadaEnEventos">
@@ -42,9 +49,6 @@
       </rdf:Description>
     </rdfs:subClassOf>
   </cloud:GoogleCloudPlatform>
-  <rdf:Description rdf:about="http://www.cloud.com/migrarACloud">
-    <rdfs:subPropertyOf rdf:resource="http://www.cloud.com/ofrecer"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://www.cloud.com/alquilarSinCosto">
     <rdfs:subPropertyOf>
       <rdf:Description rdf:about="http://www.cloud.com/alquilarServicios">
@@ -66,6 +70,9 @@
       </rdf:Description>
     </rdfs:subClassOf>
   </rdf:Description>
+  <rdf:Description rdf:about="http://www.cloud.com/venderLicencias">
+    <rdfs:subPropertyOf rdf:resource="http://www.cloud.com/venderProductosYServiciosDeTerceros"/>
+  </rdf:Description>
   <cloud:AmazonWebServices rdf:about="http://www.cloud.com/AWSLambda">
     <rdfs:subClassOf rdf:resource="http://www.cloud.com/ArquitecturaBasadaEnEventos"/>
   </cloud:AmazonWebServices>
@@ -82,15 +89,9 @@
   <cloud:AmazonWebServices rdf:about="http://www.cloud.com/AmazonDynamoDB">
     <rdf:type rdf:resource="http://www.cloud.com/BasesDeDatosNoRelacionales"/>
   </cloud:AmazonWebServices>
-  <rdf:Description rdf:about="http://www.cloud.com/venderProductosYServiciosDeTerceros">
-    <rdfs:subPropertyOf rdf:resource="http://www.cloud.com/ofrecer"/>
-  </rdf:Description>
   <cloud:MicrosoftAzure rdf:about="http://www.cloud.com/AzureSQLDatabase">
     <rdf:type rdf:resource="http://www.cloud.com/BasesDeDatosRelacionales"/>
   </cloud:MicrosoftAzure>
-  <rdf:Description rdf:about="http://www.cloud.com/evaluarCostos">
-    <rdfs:subPropertyOf rdf:resource="http://www.cloud.com/ofrecer"/>
-  </rdf:Description>
   <cloud:MicrosoftAzure rdf:about="http://www.cloud.com/AzureFunctions">
     <rdfs:subClassOf rdf:resource="http://www.cloud.com/ArquitecturaBasadaEnEventos"/>
   </cloud:MicrosoftAzure>
@@ -98,6 +99,7 @@
     <rdfs:subPropertyOf rdf:resource="http://www.cloud.com/alquilarServicios"/>
   </rdf:Description>
   <cloud:AmazonWebServices rdf:about="http://www.cloud.com/AmazonRDS">
+    <cloud:alquilarConCosto rdf:resource="http://www.cloud.com/MicrosoftAzure"/>
     <rdf:type rdf:resource="http://www.cloud.com/BasesDeDatosRelacionales"/>
   </cloud:AmazonWebServices>
   <cloud:GoogleCloudPlatform rdf:about="http://www.cloud.com/CloudStorage">
@@ -110,4 +112,11 @@
   <cloud:GoogleCloudPlatform rdf:about="http://www.cloud.com/Datastore">
     <rdf:type rdf:resource="http://www.cloud.com/BasesDeDatosNoRelacionales"/>
   </cloud:GoogleCloudPlatform>
+  <cloud:Firebase rdf:nodeID="A0">
+    <rdf:type rdf:resource="http://www.cloud.com/CloudMessaging"/>
+    <rdf:type rdf:resource="http://www.cloud.com/geolocalizationAPI"/>
+  </cloud:Firebase>
+  <rdf:Description rdf:about="http://www.cloud.com/GoogleCloudPlatform">
+    <cloud:ofrecer rdf:nodeID="A0"/>
+  </rdf:Description>
 </rdf:RDF>
