@@ -127,7 +127,7 @@ public class inferencias {
                     
                     switch(option){
                         case 1:
-                            System.out.println("Entrando a la consunta de la inferencia sobre la base de datos DataStore....");
+                            System.out.println("Entrando a la consunta de la inferencia sobre la base de datos.......");
                             String resourcedURI = model.expandPrefix("cloud:BaseDeDatos");
                             BD = model.getResource(resourcedURI);                            
                             Datastore = obtenerRecurso("Datastore", model);
