@@ -192,6 +192,9 @@ public class Proyecto_IGC {
                     model.add(Datastore, RDF.type, BDNoRelacional);
                     model.add(AmazonDynamo, RDF.type, BDNoRelacional);
                     
+                    //Graficando inferencia
+                    model.add(Datastore, RDF.type, BD);
+                    
                     // Por proveedor
                     model.add(AWSLambda, RDF.type, AWS);
                     model.add(AzureFunctions, RDF.type, Azure);
