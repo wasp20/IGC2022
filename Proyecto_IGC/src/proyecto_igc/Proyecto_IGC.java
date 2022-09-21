@@ -233,6 +233,13 @@ public class Proyecto_IGC {
                     nodoBlanco.addProperty(RDF.type, geolocalilzation);
                     nodoBlanco.addProperty(RDF.type, cloudmessaging);
                     nodoBlanco.addProperty(RDF.type, firebase);
+<<<<<<< HEAD
+=======
+                    
+// Relacionar recurso AmazonRDS con el recurso Azure mediante la propiedad alquilarconcosto 
+// - :AmazonRDS :alquilarconcosto :Azure                   
+                    model.add(AmazonRDS,alquilarconcosto, Azure);
+>>>>>>> develop
 
 // Guardar RDF
                     grabarRDF("productos_y_servicios_nube.rdf", model);

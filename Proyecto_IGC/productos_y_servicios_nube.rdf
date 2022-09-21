@@ -31,6 +31,13 @@
       </rdf:Description>
     </rdf:type>
   </cloud:GoogleCloudPlatform>
+  <rdf:Description rdf:about="http://www.cloud.com/venderSuscripciones">
+    <rdfs:subPropertyOf>
+      <rdf:Description rdf:about="http://www.cloud.com/venderProductosYServiciosDeTerceros">
+        <rdfs:subPropertyOf rdf:resource="http://www.cloud.com/ofrecer"/>
+      </rdf:Description>
+    </rdfs:subPropertyOf>
+  </rdf:Description>
   <cloud:GoogleCloudPlatform rdf:about="http://www.cloud.com/CloudFunctions">
     <rdfs:subClassOf>
       <rdf:Description rdf:about="http://www.cloud.com/ArquitecturaBasadaEnEventos">
@@ -42,6 +49,16 @@
       </rdf:Description>
     </rdfs:subClassOf>
   </cloud:GoogleCloudPlatform>
+<<<<<<< HEAD
+=======
+  <rdf:Description rdf:about="http://www.cloud.com/alquilarSinCosto">
+    <rdfs:subPropertyOf>
+      <rdf:Description rdf:about="http://www.cloud.com/alquilarServicios">
+        <rdfs:subPropertyOf rdf:resource="http://www.cloud.com/ofrecer"/>
+      </rdf:Description>
+    </rdfs:subPropertyOf>
+  </rdf:Description>
+>>>>>>> develop
   <cloud:GoogleCloudPlatform rdf:about="http://www.cloud.com/PersistentDisk">
     <rdf:type>
       <rdf:Description rdf:about="http://www.cloud.com/AlmacenamientoEnBloque">
@@ -55,6 +72,9 @@
         <rdfs:subClassOf rdf:resource="http://www.cloud.com/Computación"/>
       </rdf:Description>
     </rdfs:subClassOf>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.cloud.com/venderLicencias">
+    <rdfs:subPropertyOf rdf:resource="http://www.cloud.com/venderProductosYServiciosDeTerceros"/>
   </rdf:Description>
   <cloud:AmazonWebServices rdf:about="http://www.cloud.com/AWSLambda">
     <rdfs:subClassOf rdf:resource="http://www.cloud.com/ArquitecturaBasadaEnEventos"/>
@@ -79,6 +99,7 @@
     <rdfs:subClassOf rdf:resource="http://www.cloud.com/ArquitecturaBasadaEnEventos"/>
   </cloud:MicrosoftAzure>
   <cloud:AmazonWebServices rdf:about="http://www.cloud.com/AmazonRDS">
+    <cloud:alquilarConCosto rdf:resource="http://www.cloud.com/MicrosoftAzure"/>
     <rdf:type rdf:resource="http://www.cloud.com/BasesDeDatosRelacionales"/>
   </cloud:AmazonWebServices>
   <cloud:GoogleCloudPlatform rdf:about="http://www.cloud.com/CloudStorage">

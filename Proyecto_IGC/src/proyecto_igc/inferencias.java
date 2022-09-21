@@ -18,16 +18,28 @@ import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.reasoner.Derivation;
 import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.RDFS;
+<<<<<<< HEAD
+=======
+import java.util.Scanner;
+>>>>>>> develop
 
 public class inferencias {
         
           public static Resource obtenerRecurso ( String id , Model model ) {
+<<<<<<< HEAD
                     String uri = model . expandPrefix (" cloud:" + id);
+=======
+                    String uri = model.expandPrefix ("cloud:" + id);
+>>>>>>> develop
                     return model.getResource (uri );
           }
 
           public static Property obtenerPropiedad ( String id , Model model ) {
+<<<<<<< HEAD
                     String uri = model . expandPrefix (" cloud:" + id);
+=======
+                    String uri = model.expandPrefix ("cloud:" + id);
+>>>>>>> develop
                     return model.getProperty (uri );
           }
 
@@ -40,6 +52,21 @@ public class inferencias {
                     }
           }
           
+<<<<<<< HEAD
+=======
+          public static Boolean bMostrarDeclaraciones(InfModel inf, Resource Sujeto, Property predicado, Resource objeto){
+                    Boolean hayDeclaraciones = Boolean.FALSE;
+                    Selector selector = new SimpleSelector(Sujeto, predicado, objeto);
+                    StmtIterator iter = inf.listStatements(selector);
+                    while (iter.hasNext()){
+                        hayDeclaraciones = Boolean.TRUE;
+                        System.out.println(iter.nextStatement().toString());
+                    }
+                    
+                    return hayDeclaraciones;
+          }
+          
+>>>>>>> develop
           public static Boolean existenAfirmaciones(InfModel inf, Resource Sujeto, Property predicado, Resource objeto) {
                     Boolean hayAfirmaciones;
                     Selector selector = new SimpleSelector(Sujeto, predicado, objeto);
@@ -75,6 +102,7 @@ public class inferencias {
                     InfModel inf = ModelFactory.createRDFSModel(model);
                     // Guardar las derivaciones 
                     inf.setDerivationLogging(true);
+<<<<<<< HEAD
         
                     String resourceURI = model.expandPrefix("cloud:AmazonRDS");
                     Resource AmazonRDS = model.getResource(resourceURI);
@@ -92,6 +120,65 @@ public class inferencias {
                     }
 
 
+=======
+                    
+                    //Resource
+                    Resource Azure;
+                    Resource AmazonRDS;
+                    Resource ServiciosEnLaNube;
+                    //Propiedad
+                    Property alquilar;
+                    
+                    int option;
+                    Scanner myObj = new Scanner(System.in);
+                    
+                    System.out.println("==========Inferencias=============\n");
+                    System.out.println("Ingrese el numero que desea ejecutar\n");
+                    System.out.println("[1]Inferencia usando subClassOf");
+                    System.out.println("[2]Inferencia usando subPropertyOf");
+                    System.out.println("[3]Inferencia usando Domain o Range");
+                    System.out.println("[4]Consulta usando patrones de interseccion o union\n");
+                    System.out.printf("[Opción]:");                    
+                    option = myObj.nextInt();
+                    System.out.println("\n");
+                    
+                    switch(option){
+                        case 1:
+                            //do something
+                            break;
+                        case 2:
+                            AmazonRDS = obtenerRecurso("AmazonRDS", model);
+                            Azure = obtenerRecurso("MicrosoftAzure", model);
+                            alquilar = obtenerPropiedad("alquilarServicios", model);
+                            
+                            if(bMostrarDeclaraciones(inf, AmazonRDS, alquilar, Azure))
+                                System.out.println("La afirmacion es cierta\n");
+                            else
+                                System.out.println("La afirmacion NO es cierta \n");
+                            
+                            break;
+                            
+                        case 3:
+                            //do something
+                            break;
+                        case 4:
+                            AmazonRDS = obtenerRecurso("AmazonRDS", model);
+                            ServiciosEnLaNube = obtenerRecurso("ServiciosEnLaNube", model);
+                            
+                            if ( existenAfirmaciones (inf,  AmazonRDS, RDF.type, ServiciosEnLaNube )) {
+                              System.out.println("La afirmacion es cierta");
+                              mostrarDerivaciones(inf, AmazonRDS, RDF.type, ServiciosEnLaNube);
+                            } else {
+                                System.out.println("La afirmacion NO es cierta ");
+                            }
+                            
+                            break;
+                        default:
+                            System.out.println("Opcion no valida\n");
+                            break;
+                    }
+                    
+>>>>>>> develop
           }
 
 }
