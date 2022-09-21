@@ -18,6 +18,7 @@ import org.apache.jena.reasoner.Derivation;
 import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.RDFS;
 import java.util.Scanner;
+import org.apache.commons.lang3.StringUtils;
 
 public class inferencias {
         
@@ -107,81 +108,97 @@ public class inferencias {
                     //Resource
                     Resource Azure;
                     Resource BD;
+                    Resource BigTable;
                     Resource BDNoRelacional;
                     Resource Datastore;
                     //Propiedad
                     Property alquilar;
                     
-                    int option;
-                    Scanner myObj = new Scanner(System.in);
                     
-                    System.out.println("==========Inferencias=============\n");
-                    System.out.println("Ingrese el numero que desea ejecutar\n");
-                    System.out.println("[1]Inferencia usando subClassOf");
-                    System.out.println("[2]Inferencia usando subPropertyOf");
-                    System.out.println("[3]Inferencia usando Domain o Range");
-                    System.out.println("[4]Consulta usando patrones de interseccion o union\n");
-                    System.out.printf("[Opción]:");                    
-                    option = myObj.nextInt();
-                    System.out.println("\n");
-                    
-                    switch(option){
-                        case 1:
-                            System.out.println("Entrando a la consunta de la inferencia sobre la base de datos.......");
-                            String resourcedURI = model.expandPrefix("cloud:BaseDeDatos");
-                            BD = model.getResource(resourcedURI);                            
-                            Datastore = obtenerRecurso("Datastore", model);
+                    while (true){
+                        int option;
+                        Scanner myObj = new Scanner(System.in);
 
-                            if ( existenAfirmaciones (inf,  Datastore, RDF.type, BD )) {
-                                      System.out.println("La afirmacion es cierta");
-                                      mostrarDerivaciones(inf, Datastore, RDF.type, BD);
-                            } else {
-                                      System.out.println("La afirmacion NO es cierta ");
-}  
-                            break;
-                        case 2:
-                            AmazonRDS = obtenerRecurso("AmazonRDS", model);
-                            Azure = obtenerRecurso("MicrosoftAzure", model);
-                            alquilar = obtenerPropiedad("alquilarServicios", model);
-                            
-                            if(bMostrarDeclaraciones(inf, AmazonRDS, alquilar, Azure))
-                                System.out.println("La afirmacion es cierta\n");
-                            else
-                                System.out.println("La afirmacion NO es cierta \n");
-                            
-                            break;
-                            
-                        case 3:
-                            // Inferencias de tipo domain
-                            // :BD :hasKeyValueParadigm "key-value"
+                        System.out.println("==============Inferencias==============\n");
+                        System.out.println("Ingrese el numero que desea ejecutar\n");
+                        System.out.println("[1]Inferencia usando subClassOf");
+                        System.out.println("[2]Inferencia usando subPropertyOf");
+                        System.out.println("[3]Inferencia usando Domain o Range");
+                        System.out.println("[4]Consulta usando patrones de interseccion o union");
+                        System.out.println("[5]Salir\n");
+                        System.out.printf("[Opción]:");                    
+                        option = myObj.nextInt();
+                        System.out.println("\n");
+                        int s = 125;
+                        System.out.println(StringUtils.repeat("*",s));
+                        System.out.println(StringUtils.repeat("*",s));
+                        switch(option){
+                            case 1:
+                                System.out.println("Entrando a la consunta de la inferencia sobre la base de datos.......");
+                                String resourcedURI = model.expandPrefix("cloud:BaseDeDatos");
+                                BD = model.getResource(resourcedURI);                            
+                                Datastore = obtenerRecurso("Datastore", model);
 
-                            BD = obtenerRecurso("BaseDeDatos", model);
-                            BDNoRelacional = obtenerRecurso("BasesDeDatosNoRelacionales", model);
+                                if ( existenAfirmaciones (inf,  Datastore, RDF.type, BD )) {
+                                    System.out.println("------> Inferencia de tipo subClassOf\n");
+                                    System.out.println("La afirmacion es cierta");
+                                    mostrarDerivaciones(inf, Datastore, RDF.type, BD);
+                                } else {
+                                    System.out.println("La afirmacion NO es cierta ");
+    }  
+                                break;
+                            case 2:
+                                AmazonRDS = obtenerRecurso("AmazonRDS", model);
+                                Azure = obtenerRecurso("MicrosoftAzure", model);
+                                alquilar = obtenerPropiedad("alquilarServicios", model);
+                                
+                                System.out.println("------> Inferencia de tipo subPropertyOf\n");
+                                if(bMostrarDeclaraciones(inf, AmazonRDS, alquilar, Azure)) {      
+                                    System.out.println("La afirmacion es cierta\n");
+                                } else {
+                                    System.out.println("La afirmacion NO es cierta \n");
+                                }
+
+                                break;
+
+                            case 3:
+                                // Inferencias de tipo domain
+                                // :BD :hasKeyValueParadigm "key-value"
+                                
+                                BigTable = obtenerRecurso("BigTable", model);
+                                BDNoRelacional = obtenerRecurso("BasesDeDatosNoRelacionales", model);
 
 
-                            // Inferencias union de conjunto                    
-                            if ( existenAfirmaciones (inf,  BD, RDF.type, BDNoRelacional)) {
-                                      System.out.println("La afirmacion es cierta");
-                                      mostrarDerivaciones(inf,  BD, RDF.type, BDNoRelacional);
-                            } else {
-                                      System.out.println("La afirmacion NO es cierta ");
-                            }
-                            break;
-                        case 4:
-                            AmazonRDS = obtenerRecurso("AmazonRDS", model);
-                            ServiciosEnLaNube = obtenerRecurso("ServiciosEnLaNube", model);
-                            
-                            if ( existenAfirmaciones (inf,  AmazonRDS, RDF.type, ServiciosEnLaNube )) {
-                              System.out.println("La afirmacion es cierta");
-                              mostrarDerivaciones(inf, AmazonRDS, RDF.type, ServiciosEnLaNube);
-                            } else {
-                                System.out.println("La afirmacion NO es cierta ");
-                            }
-                            
-                            break;
-                        default:
-                            System.out.println("Opcion no valida\n");
-                            break;
+                                // Inferencias union de conjunto                    
+                                if ( existenAfirmaciones (inf,  BigTable, RDF.type, BDNoRelacional)) {
+                                    System.out.println("------> Inferencia de tipo domain\n");
+                                    System.out.println("La afirmacion es cierta");
+                                    mostrarDerivaciones(inf,  BigTable, RDF.type, BDNoRelacional);
+                                } else {
+                                    System.out.println("La afirmacion NO es cierta ");
+                                }
+                                break;
+                            case 4:
+                                AmazonRDS = obtenerRecurso("AmazonRDS", model);
+                                ServiciosEnLaNube = obtenerRecurso("ServiciosEnLaNube", model);
+
+                                if ( existenAfirmaciones (inf,  AmazonRDS, RDF.type, ServiciosEnLaNube )) {
+                                    System.out.println("------> Consulta usando patrones de interseccion o union\n");
+                                    System.out.println("La afirmacion es cierta");
+                                    mostrarDerivaciones(inf, AmazonRDS, RDF.type, ServiciosEnLaNube);
+                                } else {
+                                    System.out.println("La afirmacion NO es cierta ");
+                                }
+
+                                break;
+                            case 5:
+                                return;
+                            default:
+                                System.out.println("Opcion no valida\n");
+                                break;
+                        }
+                        System.out.println(StringUtils.repeat("*",s));
+                        System.out.println(StringUtils.repeat("*",s));
                     }
                     
           }

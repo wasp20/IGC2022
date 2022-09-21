@@ -18,7 +18,6 @@
       <rdf:Description rdf:about="http://www.cloud.com/BasesDeDatosNoRelacionales">
         <rdfs:subClassOf>
           <rdf:Description rdf:about="http://www.cloud.com/BaseDeDatos">
-            <cloud:hasKeyValueParadigm rdf:resource="http://www.cloud.com/Key-Value"/>
             <rdfs:subClassOf rdf:resource="http://www.cloud.com/ServiciosEnLaNube"/>
           </rdf:Description>
         </rdfs:subClassOf>
@@ -90,6 +89,9 @@
   <cloud:AmazonWebServices rdf:about="http://www.cloud.com/AmazonDynamoDB">
     <rdf:type rdf:resource="http://www.cloud.com/BasesDeDatosNoRelacionales"/>
   </cloud:AmazonWebServices>
+  <rdf:Description rdf:about="http://www.cloud.com/BigTable">
+    <cloud:hasKeyValueParadigm rdf:resource="http://www.cloud.com/Key-Value"/>
+  </rdf:Description>
   <rdf:Description rdf:about="http://www.cloud.com/hasKeyValueParadigm">
     <rdfs:domain rdf:resource="http://www.cloud.com/BasesDeDatosNoRelacionales"/>
   </rdf:Description>

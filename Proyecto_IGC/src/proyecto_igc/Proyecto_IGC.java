@@ -222,7 +222,8 @@ public class Proyecto_IGC {
                     
                     model.add(hasKeyValueParadigm, RDFS.domain, BDNoRelacional);
                     Resource KeyValueParadigm = crearRecurso(uri, "Key-Value", model);
-                    model.add(BD, hasKeyValueParadigm, KeyValueParadigm);
+                    Resource BigTable = crearRecurso(uri, "BigTable", model);
+                    model.add(BigTable, hasKeyValueParadigm, KeyValueParadigm);
                     //model.add(migrarcloud, RDFS.subPropertyOf, ofrecer);
                     //model.add(evaluarcostos, RDFS.subPropertyOf, ofrecer);
                     model.add(vender, RDFS.subPropertyOf, ofrecer);
