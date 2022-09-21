@@ -108,6 +108,7 @@ public class inferencias {
                     Resource Azure;
                     Resource BD;
                     Resource BDNoRelacional;
+                    Resource Datastore;
                     //Propiedad
                     Property alquilar;
                     
@@ -126,7 +127,17 @@ public class inferencias {
                     
                     switch(option){
                         case 1:
-                            //do something
+                            System.out.println("Entrando a la consunta de la inferencia sobre la base de datos DataStore....");
+                            String resourcedURI = model.expandPrefix("cloud:BaseDeDatos");
+                            BD = model.getResource(resourcedURI);                            
+                            Datastore = obtenerRecurso("Datastore", model);
+
+                            if ( existenAfirmaciones (inf,  Datastore, RDF.type, BD )) {
+                                      System.out.println("La afirmacion es cierta");
+                                      mostrarDerivaciones(inf, Datastore, RDF.type, BD);
+                            } else {
+                                      System.out.println("La afirmacion NO es cierta ");
+}  
                             break;
                         case 2:
                             AmazonRDS = obtenerRecurso("AmazonRDS", model);
