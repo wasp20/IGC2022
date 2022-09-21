@@ -18,6 +18,7 @@
       <rdf:Description rdf:about="http://www.cloud.com/BasesDeDatosNoRelacionales">
         <rdfs:subClassOf>
           <rdf:Description rdf:about="http://www.cloud.com/BaseDeDatos">
+            <cloud:hasKeyValueParadigm rdf:resource="http://www.cloud.com/Key-Value"/>
             <rdfs:subClassOf rdf:resource="http://www.cloud.com/ServiciosEnLaNube"/>
           </rdf:Description>
         </rdfs:subClassOf>
@@ -49,8 +50,6 @@
       </rdf:Description>
     </rdfs:subClassOf>
   </cloud:GoogleCloudPlatform>
-<<<<<<< HEAD
-=======
   <rdf:Description rdf:about="http://www.cloud.com/alquilarSinCosto">
     <rdfs:subPropertyOf>
       <rdf:Description rdf:about="http://www.cloud.com/alquilarServicios">
@@ -58,7 +57,6 @@
       </rdf:Description>
     </rdfs:subPropertyOf>
   </rdf:Description>
->>>>>>> develop
   <cloud:GoogleCloudPlatform rdf:about="http://www.cloud.com/PersistentDisk">
     <rdf:type>
       <rdf:Description rdf:about="http://www.cloud.com/AlmacenamientoEnBloque">
@@ -92,12 +90,18 @@
   <cloud:AmazonWebServices rdf:about="http://www.cloud.com/AmazonDynamoDB">
     <rdf:type rdf:resource="http://www.cloud.com/BasesDeDatosNoRelacionales"/>
   </cloud:AmazonWebServices>
+  <rdf:Description rdf:about="http://www.cloud.com/hasKeyValueParadigm">
+    <rdfs:domain rdf:resource="http://www.cloud.com/BasesDeDatosNoRelacionales"/>
+  </rdf:Description>
   <cloud:MicrosoftAzure rdf:about="http://www.cloud.com/AzureSQLDatabase">
     <rdf:type rdf:resource="http://www.cloud.com/BasesDeDatosRelacionales"/>
   </cloud:MicrosoftAzure>
   <cloud:MicrosoftAzure rdf:about="http://www.cloud.com/AzureFunctions">
     <rdfs:subClassOf rdf:resource="http://www.cloud.com/ArquitecturaBasadaEnEventos"/>
   </cloud:MicrosoftAzure>
+  <rdf:Description rdf:about="http://www.cloud.com/alquilarConCosto">
+    <rdfs:subPropertyOf rdf:resource="http://www.cloud.com/alquilarServicios"/>
+  </rdf:Description>
   <cloud:AmazonWebServices rdf:about="http://www.cloud.com/AmazonRDS">
     <cloud:alquilarConCosto rdf:resource="http://www.cloud.com/MicrosoftAzure"/>
     <rdf:type rdf:resource="http://www.cloud.com/BasesDeDatosRelacionales"/>
@@ -112,11 +116,12 @@
   <cloud:GoogleCloudPlatform rdf:about="http://www.cloud.com/Datastore">
     <rdf:type rdf:resource="http://www.cloud.com/BasesDeDatosNoRelacionales"/>
   </cloud:GoogleCloudPlatform>
-  <cloud:Firebase rdf:nodeID="A0">
-    <rdf:type rdf:resource="http://www.cloud.com/CloudMessaging"/>
-    <rdf:type rdf:resource="http://www.cloud.com/geolocalizationAPI"/>
-  </cloud:Firebase>
   <rdf:Description rdf:about="http://www.cloud.com/GoogleCloudPlatform">
-    <cloud:ofrecer rdf:nodeID="A0"/>
+    <cloud:ofrecer>
+      <cloud:Firebase>
+        <rdf:type rdf:resource="http://www.cloud.com/CloudMessaging"/>
+        <rdf:type rdf:resource="http://www.cloud.com/geolocalizationAPI"/>
+      </cloud:Firebase>
+    </cloud:ofrecer>
   </rdf:Description>
 </rdf:RDF>

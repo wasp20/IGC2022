@@ -1,4 +1,3 @@
-
 package proyecto_igc;
 
 
@@ -18,33 +17,22 @@ import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.reasoner.Derivation;
 import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.RDFS;
-<<<<<<< HEAD
-=======
 import java.util.Scanner;
->>>>>>> develop
 
 public class inferencias {
         
           public static Resource obtenerRecurso ( String id , Model model ) {
-<<<<<<< HEAD
-                    String uri = model . expandPrefix (" cloud:" + id);
-=======
                     String uri = model.expandPrefix ("cloud:" + id);
->>>>>>> develop
                     return model.getResource (uri );
           }
 
           public static Property obtenerPropiedad ( String id , Model model ) {
-<<<<<<< HEAD
-                    String uri = model . expandPrefix (" cloud:" + id);
-=======
                     String uri = model.expandPrefix ("cloud:" + id);
->>>>>>> develop
                     return model.getProperty (uri );
           }
 
           public static void mostrarDeclaraciones(InfModel inf, Resource Sujeto, Property predicado, Resource objeto){
-        
+       
                     Selector selector = new SimpleSelector(Sujeto, predicado, objeto);
                     StmtIterator iter = inf.listStatements(selector);
                     while (iter.hasNext()){
@@ -52,8 +40,6 @@ public class inferencias {
                     }
           }
           
-<<<<<<< HEAD
-=======
           public static Boolean bMostrarDeclaraciones(InfModel inf, Resource Sujeto, Property predicado, Resource objeto){
                     Boolean hayDeclaraciones = Boolean.FALSE;
                     Selector selector = new SimpleSelector(Sujeto, predicado, objeto);
@@ -66,7 +52,6 @@ public class inferencias {
                     return hayDeclaraciones;
           }
           
->>>>>>> develop
           public static Boolean existenAfirmaciones(InfModel inf, Resource Sujeto, Property predicado, Resource objeto) {
                     Boolean hayAfirmaciones;
                     Selector selector = new SimpleSelector(Sujeto, predicado, objeto);
@@ -102,7 +87,6 @@ public class inferencias {
                     InfModel inf = ModelFactory.createRDFSModel(model);
                     // Guardar las derivaciones 
                     inf.setDerivationLogging(true);
-<<<<<<< HEAD
         
                     String resourceURI = model.expandPrefix("cloud:AmazonRDS");
                     Resource AmazonRDS = model.getResource(resourceURI);
@@ -120,12 +104,10 @@ public class inferencias {
                     }
 
 
-=======
-                    
                     //Resource
                     Resource Azure;
-                    Resource AmazonRDS;
-                    Resource ServiciosEnLaNube;
+                    Resource BD;
+                    Resource BDNoRelacional;
                     //Propiedad
                     Property alquilar;
                     
@@ -159,7 +141,20 @@ public class inferencias {
                             break;
                             
                         case 3:
-                            //do something
+                            // Inferencias de tipo domain
+                            // :BD :hasKeyValueParadigm "key-value"
+
+                            BD = obtenerRecurso("BaseDeDatos", model);
+                            BDNoRelacional = obtenerRecurso("BasesDeDatosNoRelacionales", model);
+
+
+                            // Inferencias union de conjunto                    
+                            if ( existenAfirmaciones (inf,  BD, RDF.type, BDNoRelacional)) {
+                                      System.out.println("La afirmacion es cierta");
+                                      mostrarDerivaciones(inf,  BD, RDF.type, BDNoRelacional);
+                            } else {
+                                      System.out.println("La afirmacion NO es cierta ");
+                            }
                             break;
                         case 4:
                             AmazonRDS = obtenerRecurso("AmazonRDS", model);
@@ -178,7 +173,6 @@ public class inferencias {
                             break;
                     }
                     
->>>>>>> develop
           }
 
 }

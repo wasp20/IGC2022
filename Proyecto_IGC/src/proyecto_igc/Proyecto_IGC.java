@@ -208,6 +208,8 @@ public class Proyecto_IGC {
                     model.add(AmazonDynamo, RDF.type, AWS);
                     
 // Crear propiedades y subpropiedades
+                    Property hasKeyValueParadigm = crearPropiedad(uri, "hasKeyValueParadigm", model);
+                    
                     Property ofrecer = crearPropiedad(uri, "ofrecer", model);
                     //Property migrarcloud = crearPropiedad(uri, "migrarACloud", model);
                     //Property evaluarcostos = crearPropiedad(uri, "evaluarCostos", model);
@@ -218,7 +220,9 @@ public class Proyecto_IGC {
                     Property alquilarsincosto = crearPropiedad(uri, "alquilarSinCosto", model);
                     Property alquilarconcosto = crearPropiedad(uri, "alquilarConCosto", model);
                     
-                    
+                    model.add(hasKeyValueParadigm, RDFS.domain, BDNoRelacional);
+                    Resource KeyValueParadigm = crearRecurso(uri, "Key-Value", model);
+                    model.add(BD, hasKeyValueParadigm, KeyValueParadigm);
                     //model.add(migrarcloud, RDFS.subPropertyOf, ofrecer);
                     //model.add(evaluarcostos, RDFS.subPropertyOf, ofrecer);
                     model.add(vender, RDFS.subPropertyOf, ofrecer);
@@ -233,13 +237,11 @@ public class Proyecto_IGC {
                     nodoBlanco.addProperty(RDF.type, geolocalilzation);
                     nodoBlanco.addProperty(RDF.type, cloudmessaging);
                     nodoBlanco.addProperty(RDF.type, firebase);
-<<<<<<< HEAD
-=======
+
                     
 // Relacionar recurso AmazonRDS con el recurso Azure mediante la propiedad alquilarconcosto 
 // - :AmazonRDS :alquilarconcosto :Azure                   
                     model.add(AmazonRDS,alquilarconcosto, Azure);
->>>>>>> develop
 
 // Guardar RDF
                     grabarRDF("productos_y_servicios_nube.rdf", model);
